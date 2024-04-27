@@ -21,7 +21,15 @@ const loginSchema = object({
     .typeError('Campo obrigatório'),
   confirmEmail: yup.string()
     .required('Campo obrigatório')
-    .typeError('Campo obrigatório'),
+    .typeError('Campo obrigatório')
+    .test(
+      'emails-match', 'emails não coincidem',
+      function(value){
+        if(!value) return false;
+
+        return this.parent.email === value;
+      }
+    ),
   password: yup.string()
     .required('Campo obrigatório')
     .min(8, 'insira pelo menos 8 caracteres')
