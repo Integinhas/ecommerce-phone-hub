@@ -1,0 +1,16 @@
+.logo{
+  height: 5rem;
+}
+
+@media (max-width: 524px){
+  .logo{
+    height: 60px;
+  }
+}
+
+@media (max-width: 459px){
+  .logo{
+    margin-left: 5%;
+    margin-bottom: 2%;
+  }
+}

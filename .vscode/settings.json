@@ -1,0 +1,8 @@
+{
+  "files.eol": "\n",
+  "editor.tabSize": 2, //quantidade de espaços na identação
+
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  }
+}

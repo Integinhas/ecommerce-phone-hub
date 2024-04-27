@@ -1,0 +1,13 @@
+
+.errors{
+  color: red;
+  margin: 1% 2%;
+  font-size: 0.9rem;
+  font-weight:500;
+}
+
+.returnToMenu{
+  color: #FFA500;
+  font-weight: 500;
+  font-size: 1.1rem;
+}

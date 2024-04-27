@@ -1,0 +1,12 @@
+.styleProfile{
+  font-size: 1.55rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  padding: auto;
+  background: none;
+  cursor: pointer;
+  position: relative;
+  color: #FFA500;
+}
