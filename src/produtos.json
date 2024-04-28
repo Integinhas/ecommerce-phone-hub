@@ -1,54 +1,54 @@
 {
     "iphones": [
       {
-        "modelo": "iPhone 13",
-        "valor": 5999.00,
-        "imagem": "images/iphone13.jpg"
+        "title": "iPhone 13",
+        "price": 5999.00,
+        "thumbnail": "images/iphone13.jpg"
       },
       {
-        "modelo": "iPhone 13 Pro",
-        "valor": 7999.00,
-        "imagem": "images/iphone13pro.jpg"
+        "title": "iPhone 13 Pro",
+        "price": 7999.00,
+        "thumbnail": "images/iphone13pro.jpg"
       },
       {
-        "modelo": "iPhone 13 Pro Max",
-        "valor": 8999.00,
-        "imagem": "images/iphone13promax.jpg"
+        "title": "iPhone 13 Pro Max",
+        "price": 8999.00,
+        "thumbnail": "images/iphone13promax.jpg"
       },
       {
-        "modelo": "iPhone 12",
-        "valor": 4999.00,
-        "imagem": "images/iphone12.jpg"
+        "title": "iPhone 12",
+        "price": 4999.00,
+        "thumbnail": "images/iphone12.jpg"
       },
       {
-        "modelo": "iPhone 12 Pro",
-        "valor": 6999.00,
-        "imagem": "images/iphone12pro.jpg"
+        "title": "iPhone 12 Pro",
+        "price": 6999.00,
+        "thumbnail": "images/iphone12pro.jpg"
       },
       {
-        "modelo": "iPhone SE",
-        "valor": 2499.00,
-        "imagem": "images/iphonese.jpg"
+        "title": "iPhone SE",
+        "price": 2499.00,
+        "thumbnail": "images/iphonese.jpg"
       },
       {
-        "modelo": "iPhone 11",
-        "valor": 3999.00,
-        "imagem": "images/iphone11.jpg"
+        "title": "iPhone 11",
+        "price": 3999.00,
+        "thumbnail": "images/iphone11.jpg"
       },
       {
-        "modelo": "iPhone XR",
-        "valor": 3299.00,
-        "imagem": "images/iphonexr.jpg"
+        "title": "iPhone XR",
+        "price": 3299.00,
+        "thumbnail": "images/iphonexr.jpg"
       },
       {
-        "modelo": "iPhone X",
-        "valor": 4999.00,
-        "imagem": "images/iphonex.jpg"
+        "title": "iPhone X",
+        "price": 4999.00,
+        "thumbnail": "images/iphonex.jpg"
       },
       {
-        "modelo": "iPhone 8",
-        "valor": 2299.00,
-        "imagem": "images/iphone8.jpg"
+        "title": "iPhone 8",
+        "price": 2299.00,
+        "thumbnail": "images/iphone8.jpg"
       }
     ]
   }
