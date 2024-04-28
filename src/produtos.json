@@ -1,0 +1,55 @@
+{
+    "iphones": [
+      {
+        "modelo": "iPhone 13",
+        "valor": 5999.00,
+        "imagem": "images/iphone13.jpg"
+      },
+      {
+        "modelo": "iPhone 13 Pro",
+        "valor": 7999.00,
+        "imagem": "images/iphone13pro.jpg"
+      },
+      {
+        "modelo": "iPhone 13 Pro Max",
+        "valor": 8999.00,
+        "imagem": "images/iphone13promax.jpg"
+      },
+      {
+        "modelo": "iPhone 12",
+        "valor": 4999.00,
+        "imagem": "images/iphone12.jpg"
+      },
+      {
+        "modelo": "iPhone 12 Pro",
+        "valor": 6999.00,
+        "imagem": "images/iphone12pro.jpg"
+      },
+      {
+        "modelo": "iPhone SE",
+        "valor": 2499.00,
+        "imagem": "images/iphonese.jpg"
+      },
+      {
+        "modelo": "iPhone 11",
+        "valor": 3999.00,
+        "imagem": "images/iphone11.jpg"
+      },
+      {
+        "modelo": "iPhone XR",
+        "valor": 3299.00,
+        "imagem": "images/iphonexr.jpg"
+      },
+      {
+        "modelo": "iPhone X",
+        "valor": 4999.00,
+        "imagem": "images/iphonex.jpg"
+      },
+      {
+        "modelo": "iPhone 8",
+        "valor": 2299.00,
+        "imagem": "images/iphone8.jpg"
+      }
+    ]
+  }
+  
