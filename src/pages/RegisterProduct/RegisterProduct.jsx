@@ -9,6 +9,7 @@ import { FormControl, InputLabel } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { Alert } from '@mui/material';
 import { Slide, Snackbar, Stack } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -146,6 +147,10 @@ const Cadastro = () => {
                       color: '#fff'}}>
                         Continuar
                   </Button>
+                  {/* link para retornar ao home */}
+                  <Link to="/" style={{textDecoration:'none'}}>
+                    <span className="returnToMenu">Voltar para o menu</span>
+                  </Link>
                 </Stack>
 
                 {/* mensagem de alert */}
