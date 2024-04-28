@@ -2,19 +2,20 @@ import React, {} from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import logoImage from '../../components/Logo/imgLogo/logo-phone-hub.png';
-import { Stack } from '@mui/material';
+import { Slide, Snackbar, Stack } from '@mui/material';
 import { Footer } from '../../components/Footer/Footer';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { Alert } from '@mui/material';
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import {object} from 'yup';
 import * as yup from 'yup';
 
 import './cadastro.css';
 
-const loginSchema = object({
+//esquema de validação para o cadastro
+const loginSchema = yup.object({
   email: yup.string()
     .required('Campo obrigatório')
     .min(3, 'insira pelo menos 3 caracteres')
@@ -57,12 +58,18 @@ const Cadastro = () => {
 
   const navigate = useNavigate();
   const [submitted, setSubmitted] = useState(false);
+  const [alertSucessMessage, setAlertSucessMessage] = useState(null);
+  const [openAlert, setOpenAlert] = useState(false);
 
-  const handleFormSubmit = (data) => {
+  //função para lidar com o envio do formulário
+  const handleSubmit = () => {
     setSubmitted(true);
-    console.log(data);
     if (Object.keys(errors).length === 0) {
-      navigate('/login');
+      setAlertSucessMessage('Cadastro realizado com sucesso');
+      setOpenAlert(true);
+      setTimeout(() => {
+        navigate('/login');
+      }, 1500);
     }
   };
 
@@ -82,7 +89,9 @@ const Cadastro = () => {
               </p>
             </div>
             <div className="card-body">
-              <form onSubmit={onSubmit(handleFormSubmit)}>
+              {/* formulário */}
+              <form onSubmit={onSubmit(handleSubmit)}>
+                {/* campo email */}
                 <TextField
                   style={{ width: '100%', border: 'none' }}
                   id="email"
@@ -91,6 +100,7 @@ const Cadastro = () => {
                 />
                 <span className="errors">{errors?.email?.message}</span>
 
+                {/* campo de confirmação do email */}
                 <TextField
                   style={{ width: '100%', border: 'none', marginTop: '3%' }}
                   id="confirmEmail"
@@ -100,6 +110,7 @@ const Cadastro = () => {
                 <span className="errors">{errors?.confirmEmail?.message}</span>
 
                 <div className="form-group mt-4">
+                  {/* campo senha */}
                   <TextField
                     style={{ width: '100%', border: 'none' }}
                     type="password"
@@ -109,6 +120,7 @@ const Cadastro = () => {
                   />
                   <span className="errors">{errors?.password?.message}</span>
 
+                  {/* campo de confirmação da senha */}
                   <TextField
                     style={{ width: '100%', border: 'none', marginTop: '3%' }}
                     type="password"
@@ -120,13 +132,33 @@ const Cadastro = () => {
                 <span className="errors">{errors?.confirmPassword?.message}</span>
 
                 <Stack spacing={2} justifyContent="center" alignItems="center" marginTop="3%">
+                  {/* botão submit */}
                   <Button type="submit" style={{backgroundColor:'#FFA500', color:'#fff'}}>
                         Continuar
                   </Button>
+                  {/* link para retornar ao home */}
                   <Link to="/" style={{textDecoration:'none'}}>
                     <span className="returnToMenu">Voltar para o menu</span>
                   </Link>
                 </Stack>
+
+                {/* mensagem de alert */}
+                {alertSucessMessage && (
+                  <Stack sx={{ width: '100%' }} spacing={2}>
+                    <Snackbar
+                      open={openAlert}
+                      autoHideDuration={1000}
+                      onClose={() => {setOpenAlert(false);}}
+                      anchorOrigin={{vertical: 'top', horizontal: 'right'}}
+                      TransitionComponent={Slide}
+                      TransitionProps={{ direction: 'left' }}
+                    >
+                      <Alert variant="filled" severity="success">
+                        {alertSucessMessage}
+                      </Alert>
+                    </Snackbar>
+                  </Stack>
+                )}
               </form>
             </div>
           </div>

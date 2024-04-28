@@ -4,17 +4,68 @@ import { Footer } from '../../components/Footer/Footer';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
 import MenuItem from '@mui/material/MenuItem';
-import { Link } from 'react-router-dom';
+import { FormControl, InputLabel } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { Alert } from '@mui/material';
+import { Slide, Snackbar, Stack } from '@mui/material';
+
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import {object} from 'yup';
+import * as yup from 'yup';
 
 import '../style/global.css';
-import { FormControl, InputLabel } from '@mui/material';
 
+//esquema de validação para o cadastro do produto
+const productRegisterSchemma = object({
+  productName: yup
+    .string()
+    .required('campo obrigatório')
+    .min(5, 'insira pelo menos 5 caracteres')
+    .typeError('campo obrigatório'),
+  price:yup
+    .number()
+    .required('campo obrigatório')
+    .typeError('campo obrigatório'),
+  productDescription: yup
+    .string()
+    .required('campo obrigatório')
+    .min(5, 'insira pelo menos 5 caracteres')
+    .typeError('campo obrigatório'),
+  productAvailability:yup
+    .boolean()
+    .required('campo obrigatório')
+    .typeError('campo obrigatório')
+    .oneOf([true, false]),
+});
 const Cadastro = () => {
 
-  const [ selectedValue, setSelectedValue ] = useState('');
+  const { 
+    register, 
+    handleSubmit:onSubmit, 
+    formState: { errors }
+  } = useForm({ resolver: yupResolver(productRegisterSchemma) });
 
+  const [ selectedValue, setSelectedValue ] = useState();
+  const navigate = useNavigate();
+  const [submitted, setSubmitted] = useState(false);
+  const [alertSucessMessage, setAlertSucessMessage] = useState(null);
+  const [openAlert, setOpenAlert] = useState(false);
+
+  //função para lidar com o envio do formulário
+  const handleSubmit = () => {
+    setSubmitted(true);
+    if (Object.keys(errors).length === 0) {
+      setAlertSucessMessage('Cadastro realizado com sucesso');
+      setOpenAlert(true);
+      setTimeout(() => {
+        navigate('/');
+      }, 1500);
+    }
+  };
+
+  //atualiza o valor do componente disponibilidade do produto
   const handleChange = (e) => {
     setSelectedValue(e.target.value);
   };
@@ -35,57 +86,85 @@ const Cadastro = () => {
               <span>Insira os dados do produto</span>
             </p>
             <div className="card-body">
-              <form>
+              {/* formulário */}
+              <form onSubmit={onSubmit(handleSubmit)}>
+                {/* campo nome do prduto */}
                 <TextField
                   type="text"
-                  id="productName"
+                  id="product_name"
                   label="Nome do produto"
-                  name="productName"
-                  required
+                  {...register('productName')}
                   style={{ width: '100%', border: 'none' }}
                 />
+                <span className="errors">{errors?.productName?.message}</span>
 
+                {/* campo preço */}
                 <TextField
                   type="number"
                   id="price"
                   label="Preço"
-                  name="price"
-                  required
+                  {...register('price')}
                   style={{ width: '100%', border: 'none', marginTop: '3%' }}
                 />
+                <span className="errors">{errors?.price?.message}</span>
+                
+                {/* campo descrição do produto */}
                 <div className="form-group mt-4">
-
                   <TextField
                     label="Descrição do produto"
                     multiline
                     maxRows={3}
+                    {...register('productDescription')}
                     style={{width:'100%'}}
                   />
+                  <span className="errors">{errors?.productDescription?.message}</span>
 
+                  {/* campo selecionar disponibilidade do produto */}
                   <FormControl fullWidth style={{marginTop:'3%'}}>
-                    <InputLabel id="demo-simple-select-label">Disponível p/ venda</InputLabel>
+                    <InputLabel id="product_vailability_label">Disponível p/ venda</InputLabel>
                     <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
+                      labelId="product_vailability_label"
+                      id="product_vailability"
                       label="Disponível p/ venda"
                       value={selectedValue}
                       onChange={handleChange}
+                      {...register('productAvailability')}
                     >
-                      <MenuItem value={'Sim'}>Sim</MenuItem>
-                      <MenuItem value={'Não'}>Não</MenuItem>
+                      <MenuItem value={true}>Sim</MenuItem>
+                      <MenuItem value={false}>Não</MenuItem>
                     </Select>
                   </FormControl>
+                  <span className="errors">{errors?.productAvailability?.message}</span>
                 </div>
 
                 <Stack spacing={2} justifyContent="center" alignItems="center" marginTop="5%">
-                  <Link to="/">
-                    <Button style={{ 
+                  {/* botão submit */}
+                  <Button 
+                    type="submit"
+                    style={{ 
                       backgroundColor: '#DC7D00', 
                       color: '#fff'}}>
                         Continuar
-                    </Button>
-                  </Link>
+                  </Button>
                 </Stack>
+
+                {/* mensagem de alert */}
+                {alertSucessMessage && (
+                  <Stack sx={{ width: '100%' }} spacing={2}>
+                    <Snackbar
+                      open={openAlert}
+                      autoHideDuration={1000}
+                      onClose={() => {setOpenAlert(false);}}
+                      anchorOrigin={{vertical: 'top', horizontal: 'right'}}
+                      TransitionComponent={Slide}
+                      TransitionProps={{ direction: 'left' }}
+                    >
+                      <Alert variant="filled" severity="success">
+                        {alertSucessMessage}
+                      </Alert>
+                    </Snackbar>
+                  </Stack>
+                )}
 
               </form>
             </div>
