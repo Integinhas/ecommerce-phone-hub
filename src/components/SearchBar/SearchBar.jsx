@@ -55,5 +55,4 @@ function SearchBar() {
   );
 }
 
-// Exportando o componente SearchBar
 export default SearchBar;

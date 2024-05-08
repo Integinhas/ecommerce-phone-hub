@@ -12,8 +12,7 @@ export function Home(){
       <Header /> {/* Componente de cabeçalho */}
       <Products /> {/* Componente que exibe a lista de produtos */}
       <Cart /> {/* Componente que representa o carrinho */}
-      <Footer />
+      <Footer /> {/* Componente footer */}
     </Provider>
   );
-
 }
