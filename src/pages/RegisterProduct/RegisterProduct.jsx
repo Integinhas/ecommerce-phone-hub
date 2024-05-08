@@ -10,6 +10,9 @@ import { useNavigate } from 'react-router-dom';
 import { Alert } from '@mui/material';
 import { Slide, Snackbar, Stack } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { styled } from '@mui/material/styles';
+import { MdDriveFolderUpload } from 'react-icons/md';
+
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -20,7 +23,7 @@ import '../style/global.css';
 
 //esquema de validação para o cadastro do produto
 const productRegisterSchemma = object({
-  productName: yup
+  title: yup
     .string()
     .required('campo obrigatório')
     .min(5, 'insira pelo menos 5 caracteres')
@@ -38,7 +41,20 @@ const productRegisterSchemma = object({
     .boolean()
     .required('campo obrigatório')
     .typeError('campo obrigatório')
-    .oneOf([true, false]),
+    .oneOf([true, false])
+});
+
+//estilo componente upload image
+const VisuallyHiddenInput = styled('input')({
+  clip: 'rect(0 0 0 0)',
+  clipPath: 'inset(50%)',
+  height: 1,
+  overflow: 'hidden',
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  whiteSpace: 'nowrap',
+  width: 1,
 });
 const Cadastro = () => {
 
@@ -55,9 +71,10 @@ const Cadastro = () => {
   const [openAlert, setOpenAlert] = useState(false);
 
   //função para lidar com o envio do formulário
-  const handleSubmit = () => {
+  const handleSubmit = (data) => {
     setSubmitted(true);
     if (Object.keys(errors).length === 0) {
+      //console.log(data);
       setAlertSucessMessage('Cadastro realizado com sucesso');
       setOpenAlert(true);
       setTimeout(() => {
@@ -94,10 +111,10 @@ const Cadastro = () => {
                   type="text"
                   id="product_name"
                   label="Nome do produto"
-                  {...register('productName')}
+                  {...register('title')}
                   style={{ width: '100%', border: 'none' }}
                 />
-                <span className="errors">{errors?.productName?.message}</span>
+                <span className="errors">{errors?.title?.message}</span>
 
                 {/* campo preço */}
                 <TextField
@@ -137,13 +154,33 @@ const Cadastro = () => {
                   </FormControl>
                   <span className="errors">{errors?.productAvailability?.message}</span>
                 </div>
+                
+                {/* Botão inserir imagem */}
+                <div>
+                  <Button
+                    component="label"
+                    role={undefined}
+                    variant="contained"
+                    tabIndex={-1}
+                    startIcon={<MdDriveFolderUpload />}
+                    style={{
+                      backgroundColor: '#FFA500', 
+                      color: '#fff',
+                      display:'flex',
+                      marginTop:'3%'
+                    }}
+                  >
+                    Adicionar imagem
+                    <VisuallyHiddenInput type="file" accept="image/*" />
+                  </Button>
+                </div>
 
                 <Stack spacing={2} justifyContent="center" alignItems="center" marginTop="5%">
                   {/* botão submit */}
                   <Button 
                     type="submit"
                     style={{ 
-                      backgroundColor: '#DC7D00', 
+                      backgroundColor: '#FFA500', 
                       color: '#fff'}}>
                         Continuar
                   </Button>
@@ -179,7 +216,7 @@ const Cadastro = () => {
             justifyContent: 'center', 
             alignItems: 'center',
             marginTop:'8%'}}>
-            Protegido por reCAPTCHA- <span style={{ color: '#DC7D00' }}>Privacidade - Condições</span>
+            Protegido por reCAPTCHA- <span style={{ color: '#FFA500' }}>Privacidade - Condições</span>
           </p>
         </div>
       </div>
